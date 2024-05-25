@@ -1,0 +1,19 @@
+{
+  "type": "module",
+  "name": "gaming-showcase-backend",
+  "version": "1.0.0",
+  "description": "Backend server for Gaming Showcase application",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node --experimental-modules server.mjs"
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "node-fetch": "^3.0.0",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
