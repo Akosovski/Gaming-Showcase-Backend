@@ -5,8 +5,7 @@
   "description": "Backend server for Gaming Showcase application",
   "main": "server.mjs",
   "scripts": {
-    "start": "node --experimental-modules server.mjs",
-    "install": "npm install"
+    "start": "node --experimental-modules server.mjs"
   },
   "dependencies": {
     "express": "^4.17.2",
