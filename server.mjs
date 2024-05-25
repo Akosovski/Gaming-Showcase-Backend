@@ -27,5 +27,6 @@ app.get('/api/steam/games', async (req, res) => {
 
 // DEV LOG
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    // console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running!`);
 });
