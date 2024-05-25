@@ -1,13 +1,21 @@
-
 import express from 'express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 dotenv.config();
 
+// Set up CORS middleware
+const corsOptions = {
+    origin: '*', // Replace '*' with your allowed origin(s)
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/api/steam/games', async (req, res) => {
@@ -27,6 +35,5 @@ app.get('/api/steam/games', async (req, res) => {
 
 // DEV LOG
 app.listen(port, () => {
-    // console.log(`Server running at http://localhost:${port}`);
     console.log(`Server running!`);
 });
