@@ -8,9 +8,9 @@ const port = process.env.PORT || 3001;
 
 dotenv.config();
 
-// Set up CORS middleware
+// CORS Middleware
 const corsOptions = {
-    origin: '*', // Replace '*' with your allowed origin(s)
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
@@ -18,6 +18,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// GET ALL OWNED GAMES 
 app.get('/api/steam/games', async (req, res) => {
     const steamId = process.env.STEAM_ID;
     const apiKey = process.env.STEAM_API_KEY;
@@ -29,7 +30,24 @@ app.get('/api/steam/games', async (req, res) => {
         res.json(data);
     } catch (error) {
         console.error('Error fetching Steam API:', error);
-        res.status(500).json({ error: 'Failed to fetch data from Steam API' });
+        res.status(500).json({ error: 'Failed to fetch game data from Steam API' });
+    }
+});
+
+// GET ACHIEVEMENT STATS WITH ID
+app.get('/api/steam/achievements/:appId', async (req, res) => {
+    const steamId = process.env.STEAM_ID;
+    const apiKey = process.env.STEAM_API_KEY;
+    const steamBaseUrl = 'http://api.steampowered.com';
+    const { appId } = req.params;
+
+    try {
+        const response = await fetch(`${steamBaseUrl}/ISteamUserStats/GetPlayerAchievements/v0001/?appid=${appId}&key=${apiKey}&steamid=${steamId}`);
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching Steam API:', error);
+        res.status(500).json({ error: 'Failed to fetch achievements data from Steam API' });
     }
 });
 
